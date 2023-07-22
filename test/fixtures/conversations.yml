@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  training_language: MyString
+  native_language: MyString
+  prompt: one
+  user: one
+
+two:
+  training_language: MyString
+  native_language: MyString
+  prompt: two
+  user: two

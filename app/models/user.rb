@@ -1,3 +1,4 @@
 class User < ApplicationRecord
-    has_many :prompts
+    has_many :prompts, dependent: :destroy
+    has_many :conversations, dependent: :destroy 
 end

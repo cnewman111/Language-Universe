@@ -4,7 +4,8 @@
 
 <div>
   <%= link_to "Edit this prompt", edit_prompt_path(@prompt) %> |
-  <%= link_to "Back to prompts", prompts_path %>
+  <%= link_to "Back to prompts", prompts_path %> |
+  <%= link_to "Start a conversation with this prompt", new_prompt_conversation_path(@prompt) %>
 
   <%= button_to "Destroy this prompt", @prompt, method: :delete %>
 </div>

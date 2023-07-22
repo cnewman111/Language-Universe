@@ -3,7 +3,7 @@ class PromptsController < ApplicationController
 
   # GET /prompts or /prompts.json
   def index
-    @prompts = Prompt.all
+    @prompts = Prompt.visible_to_user(@current_user)
   end
 
   # GET /prompts/1 or /prompts/1.json
@@ -22,6 +22,7 @@ class PromptsController < ApplicationController
   # POST /prompts or /prompts.json
   def create
     @prompt = Prompt.new(prompt_params)
+    @prompt.user = @current_user
 
     respond_to do |format|
       if @prompt.save
@@ -60,11 +61,11 @@ class PromptsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_prompt
-      @prompt = Prompt.find(params[:id])
+      @prompt = Prompt.visible_to_user(@current_user).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def prompt_params
-      params.require(:prompt).permit(:ai_name, :setting, :training_language, :native_language, :description, :user_id, :visible_to_all)
+      params.require(:prompt).permit(:ai_name, :setting, :description, :visible_to_all)
     end
 end
