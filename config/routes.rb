@@ -1,7 +1,9 @@
 # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
   resources :prompts do 
-    resources :conversations, except: [:update, :edit, :index] #C[N]RU[E]DI
+    resources :conversations, except: [:update, :edit, :index] do
+      resources :messages, only: [:create, :delete]
+    end 
   end 
   root "prompts#index"
 end

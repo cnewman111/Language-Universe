@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_203044) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_230941) do
   create_table "conversations", force: :cascade do |t|
     t.string "training_language"
     t.string "native_language"
@@ -20,6 +20,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_203044) do
     t.datetime "updated_at", null: false
     t.index ["prompt_id"], name: "index_conversations_on_prompt_id"
     t.index ["user_id"], name: "index_conversations_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "conversation_id", null: false
+    t.integer "user_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "prompts", force: :cascade do |t|
@@ -40,5 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_203044) do
 
   add_foreign_key "conversations", "prompts"
   add_foreign_key "conversations", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "prompts", "users"
 end
