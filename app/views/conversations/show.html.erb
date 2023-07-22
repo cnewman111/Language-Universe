@@ -3,8 +3,6 @@
 <%= render @conversation %>
 
 <div>
-  <%= link_to "Edit this conversation", edit_conversation_path(@conversation) %> |
-  <%= link_to "Back to conversations", conversations_path %>
 
-  <%= button_to "Destroy this conversation", @conversation, method: :delete %>
+  <%= button_to "End conversation", prompt_conversation_path(@prompt, @conversation), method: :delete %>
 </div>

@@ -6,7 +6,8 @@
   <% @prompts.each do |prompt| %>
     <%= render prompt %>
     <p>
-      <%= link_to "Show this prompt", prompt %>
+      <%= link_to "Show this prompt", prompt %> 
+      <%= link_to "Start a conversation with this prompt", new_prompt_conversation_path(prompt) %>
     </p>
   <% end %>
 </div>
