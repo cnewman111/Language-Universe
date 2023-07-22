@@ -27,10 +27,8 @@ class PromptsController < ApplicationController
     respond_to do |format|
       if @prompt.save
         format.html { redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." }
-        format.json { render :show, status: :created, location: @prompt }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @prompt.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -40,10 +38,8 @@ class PromptsController < ApplicationController
     respond_to do |format|
       if @prompt.update(prompt_params)
         format.html { redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." }
-        format.json { render :show, status: :ok, location: @prompt }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @prompt.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +50,6 @@ class PromptsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to prompts_url, notice: "Prompt was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 

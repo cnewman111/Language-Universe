@@ -19,10 +19,8 @@ class ConversationsController < ApplicationController
     respond_to do |format|
       if @conversation.save
         format.html { redirect_to prompt_conversation_url(@prompt, @conversation), notice: "Conversation was successfully created." }
-        format.json { render :show, status: :created, location: @conversation }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @conversation.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -33,7 +31,6 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to prompts_url, notice: "Conversation ended." }
-      format.json { head :no_content }
     end
   end
 
