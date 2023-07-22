@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ai_name: MyString
+  setting: MyText
+  training_language: MyString
+  native_language: MyString
+  description: MyText
+  user: one
+  visible_to_all: false
+
+two:
+  ai_name: MyString
+  setting: MyText
+  training_language: MyString
+  native_language: MyString
+  description: MyText
+  user: two
+  visible_to_all: false
