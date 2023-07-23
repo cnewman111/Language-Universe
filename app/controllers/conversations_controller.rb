@@ -4,6 +4,8 @@ class ConversationsController < ApplicationController
 
   # GET /conversations/1 or /conversations/1.json
   def show
+    @messages = @conversation.messages
+    @new_message = Message.new
   end
 
   # GET /conversations/new
@@ -16,32 +18,27 @@ class ConversationsController < ApplicationController
     @conversation = @prompt.conversations.build(conversation_params)
     @conversation.user = @current_user
 
-    respond_to do |format|
-      if @conversation.save
-        format.html { redirect_to prompt_conversation_url(@prompt, @conversation), notice: "Conversation was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+    if @conversation.save
+      redirect_to prompt_conversation_url(@prompt, @conversation), notice: "Conversation was successfully created."
+    else
+      render :new, status: :unprocessable_entity 
+    end 
   end
 
   # DELETE /conversations/1 or /conversations/1.json
   def destroy
     @conversation.destroy
-
-    respond_to do |format|
-      format.html { redirect_to prompts_url, notice: "Conversation ended." }
-    end
+    redirect_to prompts_url, notice: "Conversation ended."
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
-      @conversation = Conversation.find(params[:id])
+      @conversation = Conversation.visible_to_user(@current_user).find(params[:id])
     end
 
     def set_prompt
-      @prompt = Prompt.find(params[:prompt_id])
+      @prompt = Prompt.visible_to_user(@current_user).find(params[:prompt_id])
     end 
 
     # Only allow a list of trusted parameters through.

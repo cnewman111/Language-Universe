@@ -9,4 +9,10 @@
     <%= conversation.native_language %>
   </p>
 
+  <%= turbo_stream_from @conversation.id %>
+
+  <div id="messages">
+    <%= render @messages %>
+  </div>
+
 </div>

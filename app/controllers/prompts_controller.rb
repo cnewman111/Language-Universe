@@ -24,33 +24,26 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     @prompt.user = @current_user
 
-    respond_to do |format|
-      if @prompt.save
-        format.html { redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+    if @prompt.save
+      redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." 
+    else 
+      render :new, status: :unprocessable_entity
+    end 
   end
 
   # PATCH/PUT /prompts/1 or /prompts/1.json
   def update
-    respond_to do |format|
-      if @prompt.update(prompt_params)
-        format.html { redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
-    end
+    if @prompt.update(prompt_params)
+      redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." 
+    else 
+      render :edit, status: :unprocessable_entity 
+    end 
   end
 
   # DELETE /prompts/1 or /prompts/1.json
   def destroy
     @prompt.destroy
-
-    respond_to do |format|
-      format.html { redirect_to prompts_url, notice: "Prompt was successfully destroyed." }
-    end
+    redirect_to prompts_url, notice: "Prompt deleted"
   end
 
   private
