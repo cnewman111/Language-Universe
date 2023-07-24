@@ -5,11 +5,11 @@ class MessagesController < ApplicationController
     @message.creating_entity = "user"
     @message.user = @current_user
     
-    if !@message.save
-      render :new, status: :unprocessable_entity
-    end 
-    #Prompt conversation model for response?
-
+    is_saved = @message.save
+    render turbo_stream: turbo_stream.replace('message_errors', partial: 'message_errors', locals: { message: @message })
+    if is_saved
+      # Prompt conversation model for response?
+    end
   end
 
   def delete

@@ -3,6 +3,8 @@
 <%= render @conversation %>
 
 <div>
-  <%= render "message_form", message: @new_message %>
+  <div id="message_form">
+    <%= render "messages/message_form", message: @new_message %>
+  </div>
   <%= button_to "End conversation", prompt_conversation_path(@prompt, @conversation), method: :delete %>
 </div>

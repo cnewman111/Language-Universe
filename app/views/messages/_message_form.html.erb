@@ -1,0 +1,12 @@
+<%= form_with(model: message, url: prompt_conversation_messages_path(@prompt, @conversation)) do |form| %>
+
+  <div id="message_errors"></div>
+
+  <div>
+    <%= form.text_area :body %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
