@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_230941) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_185120) do
   create_table "conversations", force: :cascade do |t|
     t.string "training_language"
     t.string "native_language"
@@ -24,10 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_230941) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "conversation_id", null: false
-    t.integer "user_id", null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "creating_entity"
+    t.integer "user_id"
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end

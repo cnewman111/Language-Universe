@@ -2,9 +2,14 @@ class MessagesController < ApplicationController
   before_action :set_conversation
   def create
     @message = @conversation.messages.build(message_params)
+    @message.creating_entity = "user"
     @message.user = @current_user
+    
+    if !@message.save
+      render :new, status: :unprocessable_entity
+    end 
+    #Prompt conversation model for response?
 
-    @message.save
   end
 
   def delete
@@ -19,3 +24,4 @@ class MessagesController < ApplicationController
       params.require(:message).permit(:body, :conversation_id)
     end
 end
+
