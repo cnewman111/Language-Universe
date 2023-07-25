@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_25_201012) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_223318) do
   create_table "conversations", force: :cascade do |t|
     t.string "training_language"
     t.string "native_language"
@@ -52,6 +52,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_25_201012) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.boolean "guest", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

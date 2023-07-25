@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
   # POST /conversations or /conversations.json
   def create
     @conversation = @prompt.conversations.build(conversation_params)
-    @conversation.user = @current_user
+    @conversation.user = current_or_guest_user
 
     if @conversation.save
       redirect_to prompt_conversation_url(@prompt, @conversation), notice: "Conversation was successfully created."
@@ -34,11 +34,11 @@ class ConversationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
-      @conversation = Conversation.visible_to_user(@current_user).find(params[:id])
+      @conversation = Conversation.visible_to_user(current_or_guest_user).find(params[:id])
     end
 
     def set_prompt
-      @prompt = Prompt.visible_to_user(@current_user).find(params[:prompt_id])
+      @prompt = Prompt.visible_to_user(current_or_guest_user).find(params[:prompt_id])
     end 
 
     # Only allow a list of trusted parameters through.

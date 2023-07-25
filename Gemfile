@@ -45,6 +45,9 @@ gem "bootsnap", require: false
 #Performs email authentication
 gem "devise"
 
+#Adds guest users to devise
+gem "devise-guests"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

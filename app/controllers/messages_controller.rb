@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   def create
     @message = @conversation.messages.build(message_params)
     @message.creating_entity = "user"
-    @message.user = @current_user
+    @message.user = current_or_guest_user
     
     is_saved = @message.save
     render turbo_stream: turbo_stream.replace('message_errors', partial: 'message_errors', locals: { message: @message })
@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
 
   private
     def set_conversation
-      @conversation = Conversation.visible_to_user(@current_user).find(params[:conversation_id])
+      @conversation = Conversation.visible_to_user(current_or_guest_user).find(params[:conversation_id])
     end 
 
     def message_params

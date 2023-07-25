@@ -3,7 +3,7 @@ class PromptsController < ApplicationController
 
   # GET /prompts or /prompts.json
   def index
-    @prompts = Prompt.visible_to_user(@current_user)
+    @prompts = Prompt.visible_to_user(current_or_guest_user)
   end
 
   # GET /prompts/1 or /prompts/1.json
@@ -22,7 +22,7 @@ class PromptsController < ApplicationController
   # POST /prompts or /prompts.json
   def create
     @prompt = Prompt.new(prompt_params)
-    @prompt.user = @current_user
+    @prompt.user = current_or_guest_user
 
     if @prompt.save
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." 
@@ -49,7 +49,7 @@ class PromptsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_prompt
-      @prompt = Prompt.visible_to_user(@current_user).find(params[:id])
+      @prompt = Prompt.visible_to_user(current_or_guest_user).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
