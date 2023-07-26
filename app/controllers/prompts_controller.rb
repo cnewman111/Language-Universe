@@ -12,7 +12,11 @@ class PromptsController < ApplicationController
 
   # GET /prompts/new
   def new
-    @prompt = Prompt.new
+    if user_signed_in?
+      @prompt = Prompt.new
+    else
+      redirect_to new_user_session_path, notice: "Please log in to create a prompt."
+    end 
   end
 
   # GET /prompts/1/edit
