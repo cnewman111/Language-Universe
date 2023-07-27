@@ -1,4 +1,5 @@
 class PromptsController < ApplicationController
+  include PromptsHelper
   before_action :set_prompt, only: %i[ show edit update destroy ]
 
   # GET /prompts or /prompts.json
@@ -21,6 +22,9 @@ class PromptsController < ApplicationController
 
   # GET /prompts/1/edit
   def edit
+    if !user_can_modify(@prompt, current_or_guest_user)
+      redirect_to prompts_path
+    end 
   end
 
   # POST /prompts or /prompts.json
@@ -28,7 +32,7 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     @prompt.user = current_or_guest_user
 
-    if @prompt.save
+    if user_can_modify(@prompt, current_or_guest_user) && @prompt.save
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." 
     else 
       render :new, status: :unprocessable_entity
@@ -37,7 +41,7 @@ class PromptsController < ApplicationController
 
   # PATCH/PUT /prompts/1 or /prompts/1.json
   def update
-    if @prompt.user_can_modify(@current_or_guest_user) && @prompt.update(prompt_params)
+    if user_can_modify(@prompt, current_or_guest_user) && @prompt.update(prompt_params)
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." 
     else 
       render :edit, status: :unprocessable_entity 
@@ -46,8 +50,12 @@ class PromptsController < ApplicationController
 
   # DELETE /prompts/1 or /prompts/1.json
   def destroy
-    @prompt.destroy
-    redirect_to prompts_url, notice: "Prompt deleted"
+    if user_can_modify(@prompt, current_or_guest_user)
+      @prompt.destroy
+      redirect_to prompts_url, notice: "Prompt deleted"
+    else 
+      redirect_to prompt_url(@prompt)
+    end 
   end
 
   private

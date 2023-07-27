@@ -14,4 +14,12 @@
     <%= prompt.description %>
   </p>
 
+  <% if user_can_modify(@prompt, current_or_guest_user)%>
+    <p>
+      <strong>visible_to_all:</strong>
+      <%= prompt.visible_to_all %>
+    </p>
+  <%end%>
+
+
 </div>
