@@ -37,7 +37,7 @@ class PromptsController < ApplicationController
 
   # PATCH/PUT /prompts/1 or /prompts/1.json
   def update
-    if @prompt.update(prompt_params)
+    if @prompt.user_can_modify(@current_or_guest_user) && @prompt.update(prompt_params)
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." 
     else 
       render :edit, status: :unprocessable_entity 
