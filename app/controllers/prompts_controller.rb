@@ -4,7 +4,7 @@ class PromptsController < ApplicationController
 
   # GET /prompts or /prompts.json
   def index
-    @prompts = Prompt.visible_to_user(current_or_guest_user)
+    @prompts = Prompt.visible_by_user(current_or_guest_user)
   end
 
   # GET /prompts/1 or /prompts/1.json
@@ -22,7 +22,8 @@ class PromptsController < ApplicationController
 
   # GET /prompts/1/edit
   def edit
-    if !user_can_modify(@prompt, current_or_guest_user)
+    puts current_or_guest_user
+    if !user_can_modify(@prompt)
       redirect_to prompts_path
     end 
   end
@@ -32,7 +33,7 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     @prompt.user = current_or_guest_user
 
-    if user_can_modify(@prompt, current_or_guest_user) && @prompt.save
+    if user_can_modify(@prompt) && @prompt.save
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." 
     else 
       render :new, status: :unprocessable_entity
@@ -41,7 +42,7 @@ class PromptsController < ApplicationController
 
   # PATCH/PUT /prompts/1 or /prompts/1.json
   def update
-    if user_can_modify(@prompt, current_or_guest_user) && @prompt.update(prompt_params)
+    if user_can_modify(@prompt) && @prompt.update(prompt_params)
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully updated." 
     else 
       render :edit, status: :unprocessable_entity 
@@ -50,7 +51,7 @@ class PromptsController < ApplicationController
 
   # DELETE /prompts/1 or /prompts/1.json
   def destroy
-    if user_can_modify(@prompt, current_or_guest_user)
+    if user_can_modify(@prompt)
       @prompt.destroy
       redirect_to prompts_url, notice: "Prompt deleted"
     else 
@@ -61,7 +62,7 @@ class PromptsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_prompt
-      @prompt = Prompt.visible_to_user(current_or_guest_user).find(params[:id])
+      @prompt = Prompt.visible_by_user(current_or_guest_user).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

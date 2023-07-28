@@ -12,9 +12,6 @@ class MessagesController < ApplicationController
     end
   end
 
-  def delete
-  end
-
   private
     def set_conversation
       @conversation = Conversation.visible_to_user(current_or_guest_user).find(params[:conversation_id])

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_27_203039) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_28_195439) do
   create_table "conversations", force: :cascade do |t|
     t.string "training_language"
     t.string "native_language"
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_27_203039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_prompts_on_user_id"
+    t.index ["visible_to_all"], name: "index_prompts_on_visible_to_all"
   end
 
   create_table "users", force: :cascade do |t|

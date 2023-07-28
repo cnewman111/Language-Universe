@@ -19,8 +19,8 @@
 
   <% if current_or_guest_user.is_admin %>
     <div>
-      <%= form.label :visible_to_all?, style: "display: checkbox" %>
-      <%= form.check_box :visible_to_all? %>
+      <%= form.label :visible_to_all, style: "display: checkbox" %>
+      <%= form.check_box :visible_to_all %>
     </div>
   <% end %>
 
