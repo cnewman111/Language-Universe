@@ -48,6 +48,9 @@ gem "devise"
 #Adds guest users to devise
 gem "devise-guests"
 
+#OpenAI API
+gem "ruby-openai"
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
