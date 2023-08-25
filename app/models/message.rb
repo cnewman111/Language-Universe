@@ -1,9 +1,11 @@
 class Message < ApplicationRecord
   belongs_to :conversation
-  belongs_to :user
   validates :body, :conversation_id, presence: :true
   validate :has_legal_creating_entity
   after_create_commit { broadcast_append_to self.conversation_id }
+  scope :user_messages, -> { where(creating_entity: ENTITIES[0]) }
+  scope :character_messages, -> { where(creating_entity: ENTITIES[1]) }
+  scope :translator_messages, -> { where(creating_entity: ENTITIES[2]) }
 
   ENTITIES = ["user", "ai", "system"].freeze 
 
@@ -11,8 +13,6 @@ class Message < ApplicationRecord
   def has_legal_creating_entity
     if !ENTITIES.include?(creating_entity)
       errors.add(:creating_entity, "must be a valid entity in Message::ENTITIES") 
-    elsif creating_entity == :user && !User.find(user_id)
-      errors.add(:user_id, "must reference a valid user")
     end 
   end 
 end

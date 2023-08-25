@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
         # See further documentation for devise_guests: 
         # github.comhttps://github.com/cbeer/devise-guests/cbeer/devise-guests
         def transfer_guest_to_user
-            current_user.conversations += guest_user.prompts
-            current_user.messages += guest_user.messages    
+            current_user.conversations += guest_user.conversations
         end 
 end

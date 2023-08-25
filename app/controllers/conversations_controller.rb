@@ -5,6 +5,9 @@ class ConversationsController < ApplicationController
   # GET /conversations/1 or /conversations/1.json
   def show
     @messages = @conversation.messages
+    @user_messages = @conversation.messages.user_messages
+    @character_messages = @conversation.messages.character_messages
+    @translator_messages = @conversation.messages.translator_messages
     @new_message = Message.new
   end
 

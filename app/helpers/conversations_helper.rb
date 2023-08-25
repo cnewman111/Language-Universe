@@ -33,5 +33,5 @@ module ConversationsHelper
     ].freeze
 
     MODEL = "gpt-3.5-turbo"
-    TEMPERATURE = 0.8
+    TEMPERATURE = 1.0
 end

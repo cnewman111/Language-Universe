@@ -1,18 +1,29 @@
 <div id="<%= dom_id conversation %>">
   <p>
-    <strong>Training language:</strong>
+  <strong>Training language:</strong>
     <%= conversation.training_language %>
   </p>
 
   <p>
-    <strong>Native language:</strong>
+  <strong>Native language:</strong>
     <%= conversation.native_language %>
   </p>
 
-  <%= turbo_stream_from @conversation.id %>
+  <%= turbo_stream_from conversation.id %>
 
-  <div id="messages">
-    <%= render @messages %>
+  <div id="user messages">
+    <h4> User Messages </h4>
+    <%= render @user_messages %>
+  </div>
+
+  <div id="character messages">
+    <h4> Character Messages </h4>
+    <%= render @character_messages %>
+  </div>
+
+  <div id="translator messages">
+    <h4> Translator Messages </h4>
+    <%= render @translator_messages %>
   </div>
 
 </div>
