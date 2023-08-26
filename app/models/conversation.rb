@@ -8,8 +8,8 @@ class Conversation < ApplicationRecord
 
 
   def create_responses 
-    translator_respond
     character_respond
+    translator_respond
   end 
 
   private
@@ -21,7 +21,7 @@ class Conversation < ApplicationRecord
       self.messages.each do |m|
         if m.creating_entity == Message::ENTITIES[0]
           dialouge.push({ role: Message::ENTITIES[0], content: m.body})
-        elsif m.creating_entity == Message::ENTITIES[2]
+        elsif m.creating_entity == Message::ENTITIES[1]
           dialouge.push({ role: 'assistant', content: m.body})
         end 
       end 
@@ -39,17 +39,12 @@ class Conversation < ApplicationRecord
     def translator_respond
       client = OpenAI::Client.new
       dialouge = [
-                      {role: 'system', content: "You will be given a conversation in the following language: " + prompt.setting + 
-                      ".  Your task is to fix the gramatical errors in the LAST MESSAGE.  If you cannot determine what they were trying to say, respond with 'error'"},
+                      {role: 'system', content: "You will be given a snippet of text in the following language: " + training_language + 
+                      ".  If the message has grammar errors, respond with the corrected message.  If the message is already correct, respond with 'no problems' in " + native_language + ". If the text makes very little sense, respond with 'error' in " + native_language + "."},
+                      {role: 'user', content: messages[-2].body}
                     ]
 
-      self.messages.each do |m|
-        if m.creating_entity == Message::ENTITIES[0]
-          dialouge.push({ role: Message::ENTITIES[0], content: m.body})
-        elsif m.creating_entity == Message::ENTITIES[1]
-          dialouge.push({ role: 'assistant', content: m.body})
-        end 
-      end 
+        
 
       message_body = client.chat(
         parameters: {
