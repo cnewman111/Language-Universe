@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LanguageApp</title>
+    <title> Language Universe </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,9 +15,36 @@
 
   </head>
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
-  </body>
+
+  <!-- Bootstrap Alert for Notices -->
+
+  <% if notice %>
+    <div classs="container p-5">
+      <div class="row no-gutters fixed-top">
+        <div class="col-lg-6 col-md-12 m-auto">
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong> Notice: </strong> <%= notice %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Bootstrap Alert for Alerts -->
+  <%if alert %>
+    <div classs="container p-5">
+      <div class="row no-gutters fixed-top">
+        <div class="col-lg-6 col-md-12 m-auto">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> Notice: </strong> <%= alert %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= yield %>
+
 </html>

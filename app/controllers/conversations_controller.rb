@@ -37,12 +37,20 @@ class ConversationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_conversation
-      @conversation = Conversation.visible_by_user(current_or_guest_user).find(params[:id])
+      if Conversation.visible_by_user(current_or_guest_user).exists?(params[:id])
+        @conversation = Conversation.visible_by_user(current_or_guest_user).find(params[:id])
+      else
+        redirect_to prompts_url, notice: "That conversation does not exist."
+      end
     end
 
     def set_prompt
-      @prompt = Prompt.visible_by_user(current_or_guest_user).find(params[:prompt_id])
-    end 
+      if Prompt.visible_by_user(current_or_guest_user).exists? params[:prompt_id]
+        @prompt = Prompt.visible_by_user(current_or_guest_user).find(params[:prompt_id])
+      else 
+        redirect_to prompts_url, notice: "That prompt does not exist"
+      end 
+    end
 
     # Only allow a list of trusted parameters through.
     def conversation_params

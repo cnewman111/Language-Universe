@@ -62,7 +62,11 @@ class PromptsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_prompt
-      @prompt = Prompt.visible_by_user(current_or_guest_user).find(params[:id])
+      if Prompt.visible_by_user(current_or_guest_user).exists? params[:id]
+        @prompt = Prompt.visible_by_user(current_or_guest_user).find(params[:id])
+      else 
+        redirect_to prompts_url, notice: "That prompt does not exist"
+      end 
     end
 
     # Only allow a list of trusted parameters through.

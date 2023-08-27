@@ -6,5 +6,5 @@ Rails.application.routes.draw do
       resources :messages, only: [:create]
     end 
   end 
-  root "prompts#index"
+  root "pages#home"
 end
