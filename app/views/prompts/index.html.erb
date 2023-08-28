@@ -1,15 +1,51 @@
 <%= render 'navbar' %>
 
-<h1>Prompts</h1>
+<div class="backgroundContainer">
+    <div class="row py-5">
+        <div class="px-0 col-md-10 col-lg-8 col-xl-6">
+            <div class="jumbotron mx-sm-5 promptsJumbotron">
+                <h5 class="display-5"> Prompts </h5>
+                <hr class="my-4">
+                <% if user_signed_in? %>
+                  <p> Click on a prompt to begin, or add prompt to create a new one. </p>
+                  <button type="button" class="btn btn-lg btn-outline-dark m-2" data-bs-toggle="modal" data-bs-target="#newPromptModal">
+                      <i class="fa-solid fa-circle-plus" style="color: #000000;"></i> Add Prompt
+                  </button>
+                <% else %>
+                  <p> Please sign in to create a prompt </p>
+                  <%= link_to "Sign In", new_user_session_path, class: "btn btn-lg btn-outline-dark m-2" %>
+                <% end %>
 
-<div id="prompts">
-  <% @prompts.each do |prompt| %>
-    <%= render prompt %>
-    <p>
-      <%= link_to "Show this prompt", prompt %> 
-      <%= link_to "Start a conversation with this prompt", new_prompt_conversation_path(prompt) %>
-    </p>
-  <% end %>
+            </div>
+        </div>
+    </div>
+
+  <div class="row g-0 px-2" id="prompts">
+    <% @prompts.each do |prompt| %>
+      <%= render prompt %>
+    <% end %>
+  </div>
+</div>
 </div>
 
-<%= link_to "New prompt", new_prompt_path %>
+<!-- Modal -->
+<div class="modal fade" id="newPromptModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5"> New Prompt </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+          <%= render "form", prompt: @prompt %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+

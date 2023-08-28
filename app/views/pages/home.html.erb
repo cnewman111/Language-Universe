@@ -1,12 +1,16 @@
 <%= render 'navbar' %>
 
-<div class="homeContainer">
-    <div class="jumbotron mx-sm-5">
-        <h1 class="display-4"> Language Universe </h1>
-        <p class="lead"> Learn. Explore. Enjoy.</p>
-        <hr class="my-4">
-        <p> Click begin to get started </p>
-        <%= link_to "Begin", prompts_path, class: "btn btn-dark btn-lg", role: "button" %>
+<div class="homeBackground">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+            <div class="jumbotron mx-sm-5 homeJumbotron">
+                <h1 class="display-2"> Language Universe </h1>
+                <p class="lead"> Learn. Explore. Enjoy.</p>
+                <hr class="my-4">
+                <p> Click begin to get started </p>
+                <%= link_to "Begin", prompts_path, class: "btn btn-dark btn-lg", role: "button" %>
+            </div>
+        </div>
     </div>
 </div>
 

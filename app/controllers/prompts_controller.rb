@@ -5,6 +5,7 @@ class PromptsController < ApplicationController
   # GET /prompts or /prompts.json
   def index
     @prompts = Prompt.visible_by_user(current_or_guest_user)
+    @prompt = Prompt.new
   end
 
   # GET /prompts/1 or /prompts/1.json
@@ -33,6 +34,7 @@ class PromptsController < ApplicationController
     @prompt = Prompt.new(prompt_params)
     @prompt.user = current_or_guest_user
 
+    
     if user_can_modify(@prompt) && @prompt.save
       redirect_to prompt_url(@prompt), notice: "Prompt was successfully created." 
     else 

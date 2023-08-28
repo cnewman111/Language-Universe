@@ -1,9 +1,13 @@
-<h1>New prompt</h1>
+<%= render 'navbar' %>
 
-<%= render "form", prompt: @prompt %>
+<div class="backgroundContainer">
+  <h1>New prompt</h1>
 
-<br>
+  <%= render "form", prompt: @prompt %>
 
-<div>
-  <%= link_to "Back to prompts", prompts_path %>
+  <br>
+
+  <div>
+    <%= link_to "Back to prompts", prompts_path %>
+  </div>
 </div>

@@ -40,7 +40,7 @@ class Conversation < ApplicationRecord
       client = OpenAI::Client.new
       dialouge = [
                       {role: 'system', content: "You will be given a snippet of text in the following language: " + training_language + 
-                      ".  If the message has grammar errors, respond with the corrected message.  If the message is already correct, respond with 'no problems' in " + native_language + ". If the text makes very little sense, respond with 'error' in " + native_language + "."},
+                      ".  If the message has grammar errors, respond with the corrected message.  If the message is already correct, respond with 'no problems' in" + native_language + ". If the text makes very little sense, respond with 'error' in " + native_language + "."},
                       {role: 'user', content: messages[-2].body}
                     ]
 
