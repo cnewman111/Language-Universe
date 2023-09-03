@@ -5,9 +5,6 @@ class ConversationsController < ApplicationController
   # GET /conversations/1 or /conversations/1.json
   def show
     @messages = @conversation.messages
-    @user_messages = @conversation.messages.user_messages
-    @character_messages = @conversation.messages.character_messages
-    @translator_messages = @conversation.messages.translator_messages
     @new_message = Message.new
   end
 
@@ -20,6 +17,8 @@ class ConversationsController < ApplicationController
   def create
     @conversation = @prompt.conversations.build(conversation_params)
     @conversation.user = current_or_guest_user
+
+    @conversation.native_language="English" # Native language not yet supported
 
     if @conversation.save
       redirect_to prompt_conversation_url(@prompt, @conversation), notice: "Conversation was successfully created."

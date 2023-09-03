@@ -1,6 +1,17 @@
-<div id="<%= dom_id message %>">
-  <p>
-    <%= message.body %>
-  </p>
+<div id="<%= dom_id message %>"> </div>
 
+<div class="card">
+  <div class="card-body">
+    <% if message.creating_entity == "user" %>
+        <p class="card-text text-end fw-bold"> You </p>
+        <p class="card-text text-end"> <%= message.body %> </p>
+    <% elsif message.creating_entity == "ai"%>
+        <p class="card-text fw-bold"> <%= message.conversation.prompt.ai_name %> </p>
+        <p class="card-text"> <%= message.body %> </p>
+    <% else %>
+      <p class="card-text fw-bold"> Translator </p>
+      <p class="card-text"> <%= message.body %> </p>
+    <% end %>
+  </div>
 </div>
+

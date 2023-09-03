@@ -1,13 +1,18 @@
 <%= render 'navbar' %>
 
 <div class="backgroundContainer">
-  <h1>New prompt</h1>
 
-  <%= render "form", prompt: @prompt %>
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="jumbotron formJumbotron">
+      <h1 class="display-4">New Prompt</h1>
 
-  <br>
+      <%= render "form", prompt: @prompt %>
 
-  <div>
-    <%= link_to "Back to prompts", prompts_path %>
+      <hr class="my-4">
+
+      <%= link_to "Back to Prompts", prompts_path, class: "btn btn-outline-dark" %>
+    </div>
   </div>
+
+
 </div>

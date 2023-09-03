@@ -16,12 +16,7 @@
     <%= form.select :training_language, Conversation::LANGUAGES%>
   </div>
 
-  <div>
-    <%= form.label :native_language, style: "display: block" %>
-    <%= form.select :native_language, Conversation::LANGUAGES%>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+<div class="my-3">
+  <%= form.submit "Submit", class: "btn btn-dark" %>
+</div>
 <% end %>

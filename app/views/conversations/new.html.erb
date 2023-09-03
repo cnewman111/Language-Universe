@@ -1,9 +1,19 @@
-<h1>New conversation</h1>
 
-<%= render "conversation_form", conversation: @conversation %>
+<%= render 'navbar' %>
 
-<br>
+<div class="backgroundContainer">
 
-<div>
-  <%= link_to "Back to Prompts", prompts_path %>
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="jumbotron formJumbotron">
+      <h1 class="display-4">New Conversation </h1>
+
+      <%= render "conversation_form", conversation: @conversation %>
+
+      <hr class="my-4">
+
+      <%= link_to "Back to Prompts", prompts_path, class: "btn btn-outline-dark" %>
+    </div>
+  </div>
+
+
 </div>

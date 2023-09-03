@@ -1,12 +1,12 @@
-<%= form_with(model: message, url: prompt_conversation_messages_path(@prompt, @conversation)) do |form| %>
-
+<%= form_with(model: message, url: prompt_conversation_messages_path(@prompt, @conversation), remote: true) do |form| %>
   <div id="message_errors"></div>
 
-  <div>
-    <%= form.text_area :body %>
+  <div class="form-group pt-3">
+    <%= form.text_area :body, class: "form-control", placeholder: "Start Typing..." %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit "Send", class: "btn btn-dark mt-1" %>
   </div>
 <% end %>
+

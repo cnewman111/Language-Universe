@@ -18,31 +18,25 @@
     <!-- Font Awsome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <%= javascript_include_tag 'auto_dismiss_alerts' %>
   </head>
 
 
-  <!-- Bootstrap Alert for Notices -->
-
-  <% if notice %>
-        <div class="alert alert-info alert-dismissible fade show fixed-top" role="alert">
-          <strong> Notice: </strong> <%= notice %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-  <% end %>
-
-  <!-- Bootstrap Alert for Alerts -->
-  <%if alert %>
-    <div classs="container p-5">
-      <div class="row no-gutters fixed-top">
-        <div class="col-lg-6 col-md-12 m-auto">
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong> Notice: </strong> <%= alert %>
+    <!-- Bootstrap Alert for Notices -->
+    <% if notice %>
+          <div class="alert alert-info alert-dismissible fade show fixed-top auto-dismiss" role="alert">
+            <strong> Notice: </strong> <%= notice %>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
+
+    <!-- Bootstrap Alert for Alerts -->
+    <%if alert %>
+          <div class="alert alert-danger alert-dismissible fade show fixed-top" role="alert">
+            <strong> Alert: </strong> <%= alert %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    <% end %>
 
   <%= yield %>
 

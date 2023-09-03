@@ -1,31 +1,31 @@
-
-<%= form_with(model: prompt) do |form| %>
+<%= form_with(model: prompt, class: "form") do |form| %>
 
   <%= render 'prompt_errors', prompt: prompt %>
 
-  <div>
-    <%= form.label :ai_name, style: "display: block" %>
-    <%= form.text_field :ai_name %>
+  <div class="mb-3">
+    <%= form.label :ai_name, class: "form-label" %>
+    <%= form.text_field :ai_name, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :setting, style: "display: block" %>
-    <%= form.text_area :setting %>
+  <div class="mb-3">
+    <%= form.label :setting, class: "form-label" %>
+    <%= form.text_area :setting, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control" %>
   </div>
 
   <% if current_or_guest_user.is_admin %>
-    <div>
-      <%= form.label :visible_to_all, style: "display: checkbox" %>
-      <%= form.check_box :visible_to_all %>
+    <div class="mb-3 form-check">
+      <%= form.check_box :visible_to_all, class: "form-check-input" %>
+      <%= form.label :visible_to_all, class: "form-check-label" %>
     </div>
   <% end %>
 
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Submit", class: "btn btn-dark" %>
   </div>
 <% end %>
+
