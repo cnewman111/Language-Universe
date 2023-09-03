@@ -59,14 +59,29 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  # Mailer settings for mail catcher
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # # Mailer settings for mail catcher
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: '127.0.0.1',
+  #   port: 1025
+  # }
+  # config.action_mailer.raise_delivery_errors = false
+
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'language-universe.fly.dev' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: '127.0.0.1',
-    port: 1025
+    user_name:      Rails.application.credentials[:SENDMAIL_USERNAME],
+    password:       Rails.application.credentials[:SENDMAIL_PASSWORD],
+    domain:        'language-universe.fly.dev',
+    address:       'smtp.gmail.com',
+    port:          587,
+    authentication: :plain,
+    enable_starttls_auto: true
   }
-  config.action_mailer.raise_delivery_errors = false
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
