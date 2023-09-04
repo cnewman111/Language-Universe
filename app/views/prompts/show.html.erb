@@ -29,9 +29,12 @@
 
     <%= link_to "Start conversation", new_prompt_conversation_path(@prompt), class: "btn btn-outline-dark mx-1" %>
     <%= link_to "Back to Prompts", prompts_path, class: "btn btn-outline-dark mx-1" %>
-    <div class="btn-group">
-      <%= button_to "Delete Prompt", prompt_path(@prompt), method: :delete, class: "btn btn-outline-danger" %>
-    </div>
+
+    <% if !@prompt.visible_to_all || current_or_guest_user.is_admin %>
+      <div class="btn-group">
+        <%= button_to "Delete Prompt", prompt_path(@prompt), method: :delete, class: "btn btn-outline-danger" %>
+      </div>
+    <% end %>
 
     </div>
   </div>

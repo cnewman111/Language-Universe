@@ -16,7 +16,7 @@ class Conversation < ApplicationRecord
     def character_respond
       client = OpenAI::Client.new
       dialouge = [{role: 'system', content: "You are playing the character in the following setting: " + prompt.setting + 
-                  ".  Respond to the user's inputs only in the following language: " + training_language + ".  Do not break character."}]
+                  ".  Your name is " + prompt.ai_name + ". Respond to the user's inputs only in the following language: " + training_language + ".  Do not break character."}]
 
       self.messages.each do |m|
         if m.creating_entity == Message::ENTITIES[0]

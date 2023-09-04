@@ -39,7 +39,7 @@
 }
 
 .backgroundContainer {
-    background-image: url('example.jpg');
+    background-image: url('bgi.jpg');
     height: 100vh;
     background-size: cover;
     background-repeat: no-repeat;

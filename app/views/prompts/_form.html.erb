@@ -3,24 +3,28 @@
   <%= render 'prompt_errors', prompt: prompt %>
 
   <div class="mb-3">
-    <%= form.label :ai_name, class: "form-label" %>
+    <%= form.label :ai_name, "Character Name", class: "form-label" %>
     <%= form.text_field :ai_name, class: "form-control" %>
   </div>
+  <p> The character's name </p>
 
   <div class="mb-3">
     <%= form.label :setting, class: "form-label" %>
     <%= form.text_area :setting, class: "form-control" %>
   </div>
+  <p> Tell the computer how to act, ex: "You are an aspiring musician about to step on stage talking to a longtime fan." More details results in a more interesting character. </p>
 
   <div class="mb-3">
     <%= form.label :description, class: "form-label" %>
     <%= form.text_area :description, class: "form-control" %>
   </div>
+  <p> Give a human readable description, ex: "An aspiring musician talks to an eager fan." </p>
 
   <% if current_or_guest_user.is_admin %>
     <div class="mb-3 form-check">
       <%= form.check_box :visible_to_all, class: "form-check-input" %>
       <%= form.label :visible_to_all, class: "form-check-label" %>
+      <p> ADMIN OPTION: MAKES THE PROMPT VISIBLE TO EVERYBODY" </p>
     </div>
   <% end %>
 
