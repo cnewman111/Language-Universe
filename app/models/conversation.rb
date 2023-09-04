@@ -4,7 +4,9 @@ class Conversation < ApplicationRecord
   belongs_to :user
   has_many :messages, dependent: :destroy
   validates :training_language, :native_language, :prompt_id, :user_id, presence: :true
-  scope :visible_by_user, -> (user) {where('user_id == ?', user.id)}
+  scope :visible_by_user, ->(user) {
+    where(user_id: user.id)
+  }
 
 
   def create_responses 
