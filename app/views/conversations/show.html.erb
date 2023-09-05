@@ -8,9 +8,8 @@
         <%= render @conversation %>
 
         <div>
-          <div id="message_form">
-          <%= render "messages/message_form", message: @new_message %>
-          </div>
+            <%= render "messages/message_form", message: @new_message %>
+
           <%= button_to "End conversation", prompt_conversation_path(@prompt, @conversation), method: :delete, class: "btn btn-outline-dark mt-1" %>
         </div>
 
