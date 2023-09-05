@@ -23,7 +23,6 @@ class PromptsController < ApplicationController
 
   # GET /prompts/1/edit
   def edit
-    puts current_or_guest_user
     if !user_can_modify(@prompt)
       redirect_to prompts_path
     end 

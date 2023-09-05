@@ -3,5 +3,8 @@ class Prompt < ApplicationRecord
   has_many :conversations, dependent: :destroy
   validates :ai_name, :setting, :description, :user_id, presence: :true
   scope :visible_by_all, -> { where(visible_to_all: true) }
-  scope :visible_by_user, -> (user) { where('user_id = ?', user.id).or(visible_by_all) }
+  scope :visible_by_user, ->(user) {
+    where(user_id: user.id).or(where(visible_to_all: true))
+  }
+  
 end

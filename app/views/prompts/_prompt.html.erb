@@ -1,5 +1,5 @@
 
-<div class="col-sm-6 col-lg-4">
+<div class="col-sm-6 col-lg-4 px-2">
   <div class="card m-2 bg-light">
     <div class="card-body">
       <h5 class="card-title"> <%= prompt.ai_name %> </h5>
@@ -11,8 +11,14 @@
           </p>
         <%end%>
 
-      <%= link_to "Show prompt", prompt, class: "btn btn-outline-secondary" %>
-      <%= link_to "Start conversation", new_prompt_conversation_path(prompt), class: "btn btn-outline-secondary" %>
+      <%= link_to "Show prompt", prompt, class: "btn btn-outline-secondary mx-1" %>
+
+      <% if !prompt.visible_to_all || current_or_guest_user.is_admin %>
+          <%= link_to "Edit prompt", edit_prompt_path(prompt), class: "btn btn-outline-secondary mx-1" %>
+      <% end %>
+
+
+      <%= link_to "Start conversation", new_prompt_conversation_path(prompt), class: "btn btn-outline-secondary mx-1" %>
     </div>
   </div>
 </div>

@@ -50,7 +50,7 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :info
+  config.log_level = :debug
 
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
@@ -90,4 +90,18 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: 'language-universe.fly.dev' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name:      Rails.application.credentials[:SENDMAIL_USERNAME],
+    password:       Rails.application.credentials[:SENDMAIL_PASSWORD],
+    domain:        'language-universe.fly.dev',
+    address:       'smtp.gmail.com',
+    port:          587,
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 end

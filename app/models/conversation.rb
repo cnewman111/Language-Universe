@@ -4,7 +4,9 @@ class Conversation < ApplicationRecord
   belongs_to :user
   has_many :messages, dependent: :destroy
   validates :training_language, :native_language, :prompt_id, :user_id, presence: :true
-  scope :visible_by_user, -> (user) {where('user_id == ?', user.id)}
+  scope :visible_by_user, ->(user) {
+    where(user_id: user.id)
+  }
 
 
   def create_responses 
@@ -16,7 +18,7 @@ class Conversation < ApplicationRecord
     def character_respond
       client = OpenAI::Client.new
       dialouge = [{role: 'system', content: "You are playing the character in the following setting: " + prompt.setting + 
-                  ".  Respond to the user's inputs only in the following language: " + training_language + ".  Do not break character."}]
+                  ".  Your name is " + prompt.ai_name + ". Respond to the user's inputs only in the following language: " + training_language + ".  Do not break character."}]
 
       self.messages.each do |m|
         if m.creating_entity == Message::ENTITIES[0]

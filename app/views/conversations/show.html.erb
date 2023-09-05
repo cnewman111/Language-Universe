@@ -1,8 +1,20 @@
-<%= render @conversation %>
+<%= render 'navbar' %>
+<%= turbo_stream_from @conversation.id %>
 
-<div>
-  <div id="message_form">
-    <%= render "messages/message_form", message: @new_message %>
+<div class="backgroundContainer">
+
+  <div class="d-flex justify-content-center py-5 conversationContainer">
+    <div class="jumbotron conversationJumbotron py-5 px-3 px-sm-5">
+        <%= render @conversation %>
+
+        <div>
+            <%= render "messages/message_form", message: @new_message %>
+
+          <%= button_to "End conversation", prompt_conversation_path(@prompt, @conversation), method: :delete, class: "btn btn-outline-dark mt-1" %>
+        </div>
+
+    </div>
   </div>
-  <%= button_to "End conversation", prompt_conversation_path(@prompt, @conversation), method: :delete %>
+
+
 </div>

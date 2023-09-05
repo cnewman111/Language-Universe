@@ -1,10 +1,20 @@
-<h1>Editing prompt</h1>
+<%= render 'navbar' %>
 
-<%= render "form", prompt: @prompt %>
+<div class="backgroundContainer">
 
-<br>
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="jumbotron formJumbotron">
+      <h1 class="display-4">New Prompt</h1>
 
-<div>
-  <%= link_to "Show this prompt", @prompt %> |
-  <%= link_to "Back to prompts", prompts_path %>
+      <%= render "form", prompt: @prompt %>
+      <p> Note: Submiting changes will terminate all associated conversations </p>
+      <hr class="my-4">
+      <%= link_to "Back to Prompts", prompts_path, class: "btn btn-outline-dark mx-1" %>
+      <div class="btn-group">
+        <%= button_to "Delete Prompt", prompt_path(@prompt), method: :delete, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+
+
 </div>

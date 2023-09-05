@@ -1,12 +1,43 @@
-<%= render @prompt %>
+<%= render 'navbar' %>
 
-<div>
-  <% if user_can_modify(@prompt) %>
-    <%= link_to "Edit this prompt", edit_prompt_path(@prompt) %> 
-    <%= button_to "Destroy this prompt", @prompt, method: :delete %>
-  <% end %>
-  <%= link_to "Back to prompts", prompts_path %> |
-  <%= link_to "Start a conversation with this prompt", new_prompt_conversation_path(@prompt) %>
+<div class="backgroundContainer">
+
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="jumbotron formJumbotron">
+      <h1 class="display-4"> <%= @prompt.ai_name %> </h1>
+
+          <p>
+            <strong> Setting:</strong>
+            <%= @prompt.setting %>
+          </p>
+
+          <p>
+            <strong> Description: </strong>
+            <%= @prompt.description %>
+          </p>
+
+          <p>
+            <strong> Visible To: </strong>
+            <% if @prompt.visible_to_all %>
+            Everyone
+            <% else%>
+            Just You
+            <%end %>
+          </p>
+      
+      <hr class="my-4">
+
+    <%= link_to "Start conversation", new_prompt_conversation_path(@prompt), class: "btn btn-outline-dark mx-1" %>
+    <%= link_to "Back to Prompts", prompts_path, class: "btn btn-outline-dark mx-1" %>
+
+    <% if !@prompt.visible_to_all || current_or_guest_user.is_admin %>
+      <div class="btn-group">
+        <%= button_to "Delete Prompt", prompt_path(@prompt), method: :delete, class: "btn btn-outline-danger" %>
+      </div>
+    <% end %>
+
+    </div>
+  </div>
 
 
 </div>
